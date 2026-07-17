@@ -1,5 +1,6 @@
 @echo off
 cls
+powershell -command "Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue"
 color 0A
 echo +========================================================+
 echo ^|               POWERSHELL SECURITY CONTROL            ^|
@@ -18,15 +19,12 @@ exit
 
 :op_block
 setx /M __PSLockdownPolicy 4
-powershell -command "Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue"
-echo.
 echo.
 pause
 exit
 
 :op_unblock
 reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v __PSLockdownPolicy /f
-echo.
 echo.
 pause
 exit
