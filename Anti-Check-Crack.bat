@@ -7,7 +7,7 @@ echo +========================================================+
 echo ^|                                                        ^|
 echo ^|  [0] Block PowerShell (Constrained Language Mode)    ^|
 echo ^|  [1] Unblock PowerShell (Restore Default Mode)       ^|
-echo ^|                                                      ^|
+echo ^|                                                        ^|
 echo +========================================================+
 echo.
 set /p userinput= ^> Nhap lua chon cua ban (0 hoac 1): 
@@ -18,6 +18,7 @@ exit
 
 :op_block
 setx /M __PSLockdownPolicy 4
+powershell -command "Remove-Item (Get-PSReadLineOption).HistorySavePath -ErrorAction SilentlyContinue"
 echo.
 echo.
 pause
